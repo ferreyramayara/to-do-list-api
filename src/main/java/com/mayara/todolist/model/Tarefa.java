@@ -14,7 +14,9 @@ public class Tarefa {
     @Column(nullable = false, length = 255)
     private String titulo;
 
-    private Boolean concluida = false;
+   @Enumerated(EnumType.STRING)
+   @Column(nullable = false)
+   private Status status;
 
     private LocalDateTime dataCriacao;
     private LocalDateTime dataConclusao;
@@ -22,17 +24,16 @@ public class Tarefa {
     @PrePersist
     public void prePersist() {
         this.dataCriacao = LocalDateTime.now();
-        this.concluida = false;
+        this.status = Status.PENDENTE;
     }
 
     public Long getId() {
         return id;
     }
 
-    public Boolean getConcluida() {
-        return concluida;
+    public Status getStatus() {
+        return status;
     }
-
 
     public LocalDateTime getDataConclusao() {
         return dataConclusao;
@@ -46,20 +47,13 @@ public class Tarefa {
         return titulo;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
-    public void setConcluida(Boolean concluida) {
-        this.concluida = concluida;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public void setDataConclusao(LocalDateTime dataConclusao) {
         this.dataConclusao = dataConclusao;
-    }
-
-    public void setDataCriacao(LocalDateTime dataCriacao) {
-        this.dataCriacao = dataCriacao;
     }
 
     public void setTitulo(String titulo) {
