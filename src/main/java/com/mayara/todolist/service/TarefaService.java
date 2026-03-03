@@ -4,6 +4,8 @@ import com.mayara.todolist.model.Tarefa;
 import com.mayara.todolist.repository.TarefaRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TarefaService {
 
@@ -22,5 +24,9 @@ public class TarefaService {
         tarefa.setTitulo(titulo);
 
         return tarefaRepository.save(tarefa);
+    }
+
+    public List<Tarefa> listarTodas() {
+        return tarefaRepository.findAll();
     }
 }
