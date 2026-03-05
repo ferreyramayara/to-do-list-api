@@ -30,4 +30,11 @@ public class TarefaController {
        List<Tarefa> tarefas = tarefaService.listarTodas();
        return ResponseEntity.ok(tarefas);
    }
+
+
+   @PatchMapping("/{id}/concluir")
+    public ResponseEntity<Tarefa> concluir(@PathVariable Long id) {
+       Tarefa tarefa = tarefaService.concluirTarefa(id);
+       return ResponseEntity.ok(tarefa);
+   }
 }

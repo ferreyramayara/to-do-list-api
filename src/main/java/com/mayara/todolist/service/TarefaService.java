@@ -1,9 +1,11 @@
 package com.mayara.todolist.service;
 
+import com.mayara.todolist.model.Status;
 import com.mayara.todolist.model.Tarefa;
 import com.mayara.todolist.repository.TarefaRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -28,5 +30,15 @@ public class TarefaService {
 
     public List<Tarefa> listarTodas() {
         return tarefaRepository.findAll();
+    }
+
+    public Tarefa concluirTarefa(Long id) {
+        Tarefa tarefa = tarefaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Tarefa não encontrada"));
+
+        tarefa.setStatus(Status.CONCLUIDA);
+        tarefa.setDataConclusao(LocalDateTime.now());
+
+        return tarefaRepository.save(tarefa);
     }
 }
