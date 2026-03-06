@@ -54,4 +54,17 @@ public class TarefaService {
 
         return tarefaRepository.save(tarefa);
     }
+
+    public Tarefa editarTitulo(Long id, String novoTitulo) {
+        if (novoTitulo == null || novoTitulo.trim().isEmpty()) {
+            throw new RuntimeException("Título não pode estar vazio.");
+        }
+
+        Tarefa tarefa = tarefaRepository.buscarPorId(id)
+                .orElseThrow(() -> new RuntimeException("Tarefa não encontrada"));
+
+        tarefa.setTitulo(novoTitulo);
+
+        return tarefaRepository.save(tarefa);
+    }
 }

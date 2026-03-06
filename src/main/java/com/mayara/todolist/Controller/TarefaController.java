@@ -42,4 +42,10 @@ public class TarefaController {
         Tarefa tarefa = tarefaService.reabrirTarefa(id);
         return ResponseEntity.ok(tarefa);
    }
+
+   @PutMapping("/{id}")
+    public ResponseEntity<Tarefa> editar(@PathVariable Long id, @RequestBody Tarefa tarefa) {
+        Tarefa atualizada = tarefaService.editarTitulo(id, tarefa.getTitulo());
+        return ResponseEntity.ok(atualizada);
+   }
 }
