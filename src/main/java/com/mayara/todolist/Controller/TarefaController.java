@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/tarefas")
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class TarefaController {
 
     private final TarefaService tarefaService;
@@ -47,5 +47,12 @@ public class TarefaController {
     public ResponseEntity<Tarefa> editar(@PathVariable Long id, @RequestBody Tarefa tarefa) {
         Tarefa atualizada = tarefaService.editarTitulo(id, tarefa.getTitulo());
         return ResponseEntity.ok(atualizada);
+   }
+
+   @DeleteMapping("/{id}")
+    public ResponseEntity<Void> excluir(@PathVariable Long id) {
+        tarefaService.excluir(id);
+
+        return ResponseEntity.noContent().build();
    }
 }
